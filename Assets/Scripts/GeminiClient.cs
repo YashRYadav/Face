@@ -1,5 +1,4 @@
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
+
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -8,8 +7,8 @@ using System.Text;
 
 public class GeminiClient : MonoBehaviour
 {
-    private const string API_KEY = "AIzaSyBvJwXgcBzllys-iSEbIgzhmgsZsm5i6a8";
-    private const string URL     = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + API_KEY;
+    public APIKeys apiKeys;
+    private string URL     => "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKeys.geminiApiKey;
 
     // =========================================================================
     // 8 System Prompts
@@ -172,12 +171,3 @@ public class GeminiClient : MonoBehaviour
         }
     }
 }
-
-[System.Serializable]
-public class GeminiResponse  { public GeminiCandidate[] candidates; }
-[System.Serializable]
-public class GeminiCandidate { public GeminiContent content; }
-[System.Serializable]
-public class GeminiContent   { public GeminiPart[] parts; }
-[System.Serializable]
-public class GeminiPart      { public string text; }

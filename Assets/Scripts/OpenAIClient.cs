@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json.Linq;
 using UnityEngine;
 using UnityEngine.Networking;
@@ -7,13 +5,13 @@ using System.Collections;
 using System.Text;
 
 /// <summary>
-/// OpenAIClient — mirrors GeminiClient with same 8 prompts.
-/// Uses GPT-5-mini via OpenAI Chat Completions API.
+/// OpenAIClient — mirrors GeminiClient with same 8 prompt conditions.
+/// Uses GPT-5-mini.
 /// Free-form response parsed by FreeFormParser.
 /// </summary>
 public class OpenAIClient : MonoBehaviour
 {
-    private const string API_KEY = "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";
+    public APIKeys apiKeys;
     private const string URL     = "https://api.openai.com/v1/chat/completions";
     private const string MODEL   = "gpt-5-mini";
 
@@ -45,7 +43,7 @@ public class OpenAIClient : MonoBehaviour
             request.uploadHandler   = new UploadHandlerRaw(bodyRaw);
             request.downloadHandler = new DownloadHandlerBuffer();
             request.SetRequestHeader("Content-Type",  "application/json");
-            request.SetRequestHeader("Authorization", "Bearer " + API_KEY);
+            request.SetRequestHeader("Authorization", "Bearer " + apiKeys.openAiApiKey);
 
             yield return request.SendWebRequest();
 

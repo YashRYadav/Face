@@ -3,10 +3,7 @@ using System.Collections;
 using UniVRM10;
 
 /// <summary>
-/// Feature #2 — Emotion-Driven Eye Gaze Co-articulation
-///
-/// Attach to: Female_Test_Model_ARKit (same root as AUtoARKitMapper)
-///
+/// GazeController — manages eye gaze direction based on parsed LLM output.
 /// Uses VRM yaw/pitch API to drive gaze, then patches right eye pitch
 /// to match left eye for symmetry (fixes VRM range map imbalance).
 ///
@@ -16,7 +13,7 @@ using UniVRM10;
 /// </summary>
 public class GazeController : MonoBehaviour
 {
-    [Header("Feature #2 — Gaze Angles (degrees)")]
+    [Header("Gaze Angles (degrees)")]
     [Tooltip("How many degrees eyes rotate left/right for lateral gaze")]
     public float yawAngle   = 25f;
 
@@ -32,7 +29,6 @@ public class GazeController : MonoBehaviour
     private float targetPitch  = 0f;
 
     private Vrm10Instance vrmInstance;
-    private Coroutine     gazeCoroutine;
     private bool          initialized = false;
 
     private Transform leftEyeBone;
@@ -68,15 +64,11 @@ public class GazeController : MonoBehaviour
         {
             leftEyeBone  = animator.GetBoneTransform(HumanBodyBones.LeftEye);
             rightEyeBone = animator.GetBoneTransform(HumanBodyBones.RightEye);
-            syncEyes = (leftEyeBone != null && rightEyeBone != null);
-
-            Debug.Log($"[GazeController] LeftEye: {(leftEyeBone ? leftEyeBone.name : "NULL")}  " +
-                      $"RightEye: {(rightEyeBone ? rightEyeBone.name : "NULL")}  " +
-                      $"Sync: {syncEyes}");
+            syncEyes     = (leftEyeBone != null && rightEyeBone != null);
         }
 
         initialized = true;
-        Debug.Log("[GazeController] Initialized — YawPitch mode + right eye pitch sync.");
+        Debug.Log("[GazeController] Initialized.");
     }
 
     void LateUpdate()
@@ -100,16 +92,11 @@ public class GazeController : MonoBehaviour
 
     /// <summary>
     /// Called by AUtoARKitMapper at apex — sets gaze direction.
-    /// Does NOT auto-return to neutral. ReturnToNeutral() handles that.
     /// </summary>
     public void ApplyGaze(string gazeDirection, float holdDuration)
     {
         if (!initialized) return;
-
-        if (gazeCoroutine != null)
-            StopCoroutine(gazeCoroutine);
-
-        gazeCoroutine = StartCoroutine(GazeSequence(gazeDirection));
+        (targetYaw, targetPitch) = GetYawPitch(gazeDirection);
     }
 
     /// <summary>
@@ -118,29 +105,8 @@ public class GazeController : MonoBehaviour
     /// </summary>
     public void ReturnToNeutral()
     {
-        if (gazeCoroutine != null)
-            StopCoroutine(gazeCoroutine);
-
         targetYaw   = 0f;
         targetPitch = 0f;
-
-        Debug.Log("[GazeController] Returning to neutral.");
-    }
-
-    // ── Core coroutine ─────────────────────────────────────────────────────
-
-    IEnumerator GazeSequence(string gazeDirection)
-    {
-        (float yaw, float pitch) = GetYawPitch(gazeDirection);
-        targetYaw   = yaw;
-        targetPitch = pitch;
-
-        Debug.Log($"[GazeController] Gaze → {gazeDirection}  " +
-                  $"yaw={yaw:F1}°  pitch={pitch:F1}°");
-
-        // No auto-return here — AUtoARKitMapper.ReturnToNeutral() handles that
-        // at the start of offset phase so face and gaze fade together
-        yield break;
     }
 
     // ── Helpers ────────────────────────────────────────────────────────────
@@ -149,16 +115,16 @@ public class GazeController : MonoBehaviour
     {
         return gazeDirection switch
         {
-            "forward"    => (  0f,               0f          ),
-            "up"         => (  0f,              -pitchAngle  ),
-            "down"       => (  0f,               pitchAngle  ),
-            "left"       => ( -yawAngle,         0f          ),
-            "right"      => (  yawAngle,         0f          ),
-            "away_left"  => ( -yawAngle * 1.5f,  0f          ),
-            "away_right" => (  yawAngle * 1.5f,  0f          ),
-            "down_left"  => ( -yawAngle,         pitchAngle  ),
-            "down_right" => (  yawAngle,         pitchAngle  ),
-            _            => (  0f,               0f          )
+            "forward"    => (  0f,               0f         ),
+            "up"         => (  0f,              -pitchAngle ),
+            "down"       => (  0f,               pitchAngle ),
+            "left"       => ( -yawAngle,         0f         ),
+            "right"      => (  yawAngle,         0f         ),
+            "away_left"  => ( -yawAngle * 1.5f,  0f         ),
+            "away_right" => (  yawAngle * 1.5f,  0f         ),
+            "down_left"  => ( -yawAngle,         pitchAngle ),
+            "down_right" => (  yawAngle,         pitchAngle ),
+            _            => (  0f,               0f         )
         };
     }
 }

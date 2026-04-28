@@ -35,11 +35,9 @@ public static class FreeFormParser
     {
         AnimationData data = new AnimationData();
         data.gazeTarget = "forward"; // default
-        data.gazeHold   = 1.0f;
-        data.isMicro    = false;
         data.onset      = -1f;
         data.offset     = -1f;
-        data.laban      = new LabanData { weight = 0.5f, time = 0.5f, space = 0.5f, flow = 0.5f };
+        
 
         // ── Extract AUs ───────────────────────────────────────────────────────
         // Matches patterns like:
