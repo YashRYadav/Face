@@ -454,7 +454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d9e00388da8dc44b8caeea0b4bfa59c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::OpenAIClient
-  apiKeys: {fileID: 0}
+  apiKeys: {fileID: 11400000, guid: ecda5cf1da757724f956dfeb83f32d77, type: 2}
   activePrompt: 
 --- !u!114 &1480797352
 MonoBehaviour:
@@ -483,7 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 081085c98c869814e87566720d11afbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GeminiClient
-  apiKeys: {fileID: 0}
+  apiKeys: {fileID: 11400000, guid: ecda5cf1da757724f956dfeb83f32d77, type: 2}
   activePrompt: 
 --- !u!114 &1480797354
 MonoBehaviour:
