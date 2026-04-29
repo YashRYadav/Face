@@ -1,0 +1,9 @@
+Emotion,Mean Accuracy (Baseline),Mean Accuracy (Gaze + Asym),Difference,p-value,Significant?
+Happiness,92.60%,92.60%,0.00%,1,No
+Sadness,64.40%,51.90%,-12.60%,0.004,Yes
+Anger,65.90%,74.80%,8.90%,0.116,No
+Fear,24.40%,28.90%,4.40%,0.486,No
+Surprise,90.40%,87.40%,-3.00%,0.29,No
+Contempt,44.40%,61.50%,17.10%,0.024,Yes
+Disgust,14.80%,20.70%,5.90%,0.242,No
+OVERALL,56.70%,59.70%,3.00%,0.166,No
