@@ -4,7 +4,7 @@ using UniVRM10;
 
 /// <summary>
 /// GazeController — manages eye gaze direction based on parsed LLM output.
-/// Uses VRM yaw/pitch API to drive gaze, then patches right eye pitch
+/// Uses VRM yaw/pitch system to drive gaze, then patches right eye pitch
 /// to match left eye for symmetry (fixes VRM range map imbalance).
 ///
 /// Called by AUtoARKitMapper.PlayEmotionArc() at apex phase.

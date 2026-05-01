@@ -501,7 +501,7 @@ MonoBehaviour:
   riseSpeed: 2
   fallSpeed: 2
   currentModel: 0
-  testSituation: The character is glad to meet their friend.
+  testSituation: The character is trying to find excuses.
   useExplicitPrompt: 0
   enableGaze: 1
   macroOnset: 0.3
