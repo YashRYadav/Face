@@ -23,31 +23,8 @@ public class GeminiClient : MonoBehaviour
         "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64."+
         "Output the emotion label and a list of AU codes with intensities. ";
 
-    // P2 — Situation, Unilateral ON, Gaze OFF
-    public static string Prompt_Situation_UnilatON_GazeOFF =
-        "You are a FACS expert animating an anime style VRoid character. " +
-        "Given a situation: " +
-        "1) Identify the Ekman emotion (anger, contempt, disgust, fear, happiness, sadness, surprise). " +
-        "2) Select FACS AUs for the face with intensities between 0.0 and 1.0. " +
-        "For each AU you may optionally add a side suffix to indicate unilateral activation: " +
-        "use _L for left side only, _R for right side only, or no suffix for both sides. " +
-        "Only use _L/_R when unilateral activation is psychologically justified by the emotion. " +
-        "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64. " +
-        "Each AU can optionally have _L or _R suffix (e.g. AU12_R, AU2_L)."+
-        "Output the emotion label, a list of AU codes with intensities, and side suffixes for any unilateral AUs.";
 
-    // P3 — Situation, Unilateral OFF, Gaze ON
-    public static string Prompt_Situation_UnilatOFF_GazeON =
-        "You are a FACS expert animating an anime style VRoid character. " +
-        "Given a situation: " +
-        "1) Identify the Ekman emotion (anger, contempt, disgust, fear, happiness, sadness, surprise). " +
-        "2) Select FACS AUs for the face with intensities between 0.0 and 1.0. " +
-        "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64. " +
-        "3) Decide where the character's eyes should look based on the situation. " +
-        "State the gaze direction as one word: forward, down, up, left, right, away_left, away_right, down_left, or down_right."+
-        "Output the emotion label, a list of AU codes with intensities, and a gaze direction.";
-
-    // P4 — Situation, Unilateral ON, Gaze ON
+    // P2 — Situation, Unilateral ON, Gaze ON
     public static string Prompt_Situation_UnilatON_GazeON =
         "You are a FACS expert animating an anime style VRoid character. " +
         "Given a situation: " +
@@ -62,49 +39,6 @@ public class GeminiClient : MonoBehaviour
         "State the gaze direction as one word: forward, down, up, left, right, away_left, away_right, down_left, or down_right."+
         "Output the emotion label, a list of AU codes with intensities, side suffixes for any unilateral AUs, and a gaze direction.";
 
-    // P5 — Explicit, Unilateral OFF, Gaze OFF
-    public static string Prompt_Explicit_UnilatOFF_GazeOFF =
-        "You are a FACS expert animating an anime style VRoid character. " +
-        "Given an emotion: " +
-        "1) Select FACS AUs for the face that best express this emotion, with intensities between 0.0 and 1.0. " +
-        "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64."+
-        "Output the emotion label and a list of AU codes with intensities. ";
-
-    // P6 — Explicit, Unilateral ON, Gaze OFF
-    public static string Prompt_Explicit_UnilatON_GazeOFF =
-        "You are a FACS expert animating an anime style VRoid character. " +
-        "Given an emotion: " +
-        "1) Select FACS AUs for the face that best express this emotion, with intensities between 0.0 and 1.0. " +
-        "For each AU you may optionally add a side suffix to indicate unilateral activation: " +
-        "use _L for left side only, _R for right side only, or no suffix for both sides. " +
-        "Only use _L/_R when unilateral activation is psychologically justified by the emotion. " +
-        "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64. " +
-        "Each AU can optionally have _L or _R suffix (e.g. AU12_R, AU2_L)."+
-        "Output the emotion label, a list of AU codes with intensities, and side suffixes for any unilateral AUs.";
-
-    // P7 — Explicit, Unilateral OFF, Gaze ON
-    public static string Prompt_Explicit_UnilatOFF_GazeON =
-        "You are a FACS expert animating an anime style VRoid character. " +
-        "Given an emotion: " +
-        "1) Select FACS AUs for the face that best express this emotion, with intensities between 0.0 and 1.0. " +
-        "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64. " +
-        "2) Decide where the character's eyes should look based on the emotion. " +
-        "State the gaze direction as one word: forward, down, up, left, right, away_left, away_right, down_left, or down_right."+
-        "Output the emotion label, a list of AU codes with intensities, and a gaze direction.";
-
-    // P8 — Explicit, Unilateral ON, Gaze ON
-    public static string Prompt_Explicit_UnilatON_GazeON =
-        "You are a FACS expert animating an anime style VRoid character. " +
-        "Given an emotion: " +
-        "1) Select FACS AUs for the face that best express this emotion, with intensities between 0.0 and 1.0. " +
-        "For each AU you may optionally add a side suffix to indicate unilateral activation: " +
-        "use _L for left side only, _R for right side only, or no suffix for both sides. " +
-        "Only use _L/_R when unilateral activation is psychologically justified by the emotion. " +
-        "Available AUs: AU1, AU2, AU4, AU5, AU6, AU7, AU8, AU9, AU10, AU12, AU14, AU15, AU16, AU17, AU18, AU20, AU22, AU24, AU26, AU27, AU28, AU31, AU45, AD19, AD29, AD30, AD34, M61, M62, M63, M64. " +
-        "Each AU can optionally have _L or _R suffix (e.g. AU12_R, AU2_L). " +
-        "2) Decide where the character's eyes should look based on the emotion. " +
-        "State the gaze direction as one word: forward, down, up, left, right, away_left, away_right, down_left, or down_right."+
-        "Output the emotion label, a list of AU codes with intensities, side suffixes for any unilateral AUs, and a gaze direction.";
 
     // =========================================================================
     // Active prompt — set by EvaluationRunner or manually
