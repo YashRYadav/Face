@@ -1,3 +1,6 @@
+This is a research project on AI-driven facial animation system, where a situation is provided to the system, the AI assesses the emotion in the situation, and animates the 3d character's facial expression according to the context. It supports context-appropriate gaze movement, and unilateral expression control (as it is important to represent 'contempt' emotion, as stated in Ekman's Theory.
+
+
 How to run the project? :-
 
 Project setup
@@ -46,15 +49,15 @@ Codes used for evaluation are located in "Evaluation" folder. The summary of eac
 
 - 1. 'user\_study\_confusion.py'
 
-Generates confusion matrices from the user study summary CSV. Reads pre-computed classification percentages per emotion pair and condition, builds a 7×7 confusion matrix for each condition (baseline and full features), and saves a heatmap PNG for each to `Desktop/Evaluation_Run/Misclassification/`. Also prints a terminal summary of top misclassifications per emotion per condition.
-------------------------------------------------------------------------------------------------------------------------------------------------
-
-These were the situation prompts provided to LLM for facial animation of expressions which were evaluated by user study:
+Generates confusion matrices from the user study summary summary CSV. Reads pre-computed classification percentages per emotion pair and condition, builds a 7×7 confusion matrix for each condition (baseline and full features), and saves a heatmap PNG for each to `Desktop/Evaluation_Run/Misclassification/`. Also prints a terminal summary of top misclassifications per emotion per condition.
+_________________________________________________
+These were the situation prompts provided to the LLM for facial animation of expressions which were evaluated by user study of 45 participants:
         "The character sees someone kicking a stray animal on the street" - anger, 
         "The character listens to someone they consider inferior trying to give them advice" - contempt,
         "The character opens a container and finds it full of foul smelling rotting food" - disgust,
         "The character hears footsteps behind them in a dark empty alley at night" - fear,
         "The character is reunited with their childhood best friend after ten years apart" - happiness,
         "The character kneels beside a grave and looks down at the ground in grief" - sadness,
-        "The character opens the door and everyone they know jumps out yelling surprise" - surprise
--------------------------------------------------------------------------------------------------------------------------------------------------
+        "The character opens the door and everyone they know jumps out yelling surprise" - surprise.
+__________________________________________________
+The results received coincide with previous psychological research, and this research shows the potential of LLMs for 3d animation.
